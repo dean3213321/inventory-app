@@ -8,7 +8,8 @@
   justify-content: center;
   height: 4.2rem;
   background: rgb(230,213,239);
-background: linear-gradient(90deg, rgba(230,213,239,0.9882384228105304) 25%, rgba(133,0,205,0.9210115320542279) 85%);
+  background: linear-gradient(90deg, rgba(230,213,239,0.9882384228105304) 25%, rgba(133,0,205,0.9210115320542279) 85%);
+  border-bottom: 1px solid #000000;
 }
 
 .boxlogo{
@@ -41,5 +42,10 @@ background: linear-gradient(90deg, rgba(230,213,239,0.9882384228105304) 25%, rgb
   width: 7rem;
   height: 89.5vh;
   background: rgb(230,213,239);
-background: linear-gradient(180deg, rgba(230,213,239,0.9882384228105304) 25%, rgba(133,0,205,0.9210115320542279) 85%);
+  background: linear-gradient(180deg, rgba(230,213,239,0.9882384228105304) 25%, rgba(133,0,205,0.9210115320542279) 85%);
+  border-right: #000000 1px solid;
+}
+
+.list-unstyled{
+  font-size: 2rem;
 }
