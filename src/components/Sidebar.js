@@ -1,26 +1,43 @@
-const Sidebar = () => {
-    return ( 
-        <div className="sidebar">
-        <ul className="list-unstyled"> 
-            <li>
-                <i class="bi bi-house-door"></i> Dashboard  
-            </li>
-            <li>
-                <i class="bi bi-people-fill"></i> Users  
-            </li>
-            <li>
-                <i class="bi bi-box-seam"></i> Products 
-            </li>
-            <li>
-                <i class="bi bi-coin"></i> Sales 
-            </li>
-            <li>
-                <i class="bi bi-bar-chart-line"></i> Report  
-            </li>
-            </ul>
-        </div>
-     );
-}
- 
+import React from 'react';
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+const Sidebar = ({ isExpanded }) => {
+  return (
+    <div className={`sidebar ${isExpanded ? 'expanded' : ''}`}>
+      <ul className="list-unstyled">
+        <li>
+          <i className="bi bi-house-door"></i>
+          <span className="sidebar-text">
+            <a href="/">Dashboard</a>
+          </span>
+        </li>
+        <li>
+          <i className="bi bi-people-fill"></i>
+          <span className="sidebar-text">
+            <a href="/">Users</a>
+          </span>
+        </li>
+        <li>
+          <i className="bi bi-box-seam"></i>
+          <span className="sidebar-text">
+            <a href="/">Products</a>
+          </span>
+        </li>
+        <li>
+          <i className="bi bi-coin"></i>
+          <span className="sidebar-text">
+            <a href="/">Sales</a>
+          </span>
+        </li>
+        <li>
+          <i className="bi bi-bar-chart-line"></i>
+          <span className="sidebar-text">
+            <a href="/">Report</a>
+          </span>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 export default Sidebar;
-<div></div>

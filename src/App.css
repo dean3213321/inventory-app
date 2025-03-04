@@ -1,32 +1,34 @@
 .body{
   margin: 0;
-  
 }
 
 .navbar{
   display: flex;
   justify-content: center;
-  height: 4.2rem;
-  background: rgb(230,213,239);
-  background: linear-gradient(90deg, rgba(230,213,239,0.9882384228105304) 25%, rgba(133,0,205,0.9210115320542279) 85%);
-  border-bottom: 1px solid #000000;
+  height: 4.5rem;
+  background-color: #502d77;
 }
 
-.boxlogo{
-  position: absolute;
-  display: flex;
-  margin-right: 78.5rem;
-  font-size: 3rem;
-  color: rgb(0, 0, 0);
+.wislogo{
+  margin-right: 75rem;
+  margin-top: .5rem;
+  height: 3.5rem;
 }
 
 .burgericon{
   position: absolute;
   display: flex;
-  margin-right: 68.5rem;
+  margin-right: 62rem;
   font-size: 3rem;
   color: rgb(0, 0, 0);
+  
 }
+
+.burgericon:hover{
+  cursor: pointer;
+  color: rgb(238, 241, 241);
+}
+
 
 .user-info{
   position: absolute;
@@ -36,16 +38,66 @@
   color: white;
 }
 
-.sidebar{
+.sidebar {
   display: flex;
   justify-content: left;
-  width: 7rem;
-  height: 89.5vh;
-  background: rgb(230,213,239);
-  background: linear-gradient(180deg, rgba(230,213,239,0.9882384228105304) 25%, rgba(133,0,205,0.9210115320542279) 85%);
-  border-right: #000000 1px solid;
+  width: 4.1rem; /* Reduced width to fit only icons */
+  height: 88.8vh;
+  background-color: #502d77;
+  transition: width 0.3s ease; /* Smooth transition for width change */
 }
 
-.list-unstyled{
-  font-size: 2rem;
+.sidebar:hover {
+  width: 10.8rem; /* Expanded width on hover */
+}
+
+.sidebar.expanded {
+  width: 10.7rem; /* Expanded width */
+}
+
+.sidebar ul {
+  font-size: 1.31rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 2.4rem 1rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.sidebar i {
+  font-size: 1.5rem;
+  color: white;
+  margin-right: .5rem; /* Space between icon and text */
+}
+
+.sidebar-text {
+  opacity: 0; /* Hide text by default */
+  transition: opacity 0.3s ease; /* Smooth transition for text visibility */
+}
+
+.sidebar:hover .sidebar-text {
+  opacity: 1; /* Show text on hover */
+  
+}
+
+.sidebar.expanded .sidebar-text {
+  opacity: 1; /* Show text when expanded */
+}
+
+
+.sidebar a{
+  color: black;
+  list-style: none;
+  text-decoration: none;
+}
+
+.sidebar a:hover{
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: beige;
 }

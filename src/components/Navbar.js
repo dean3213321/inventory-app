@@ -1,29 +1,19 @@
-import logo from '../wesLogo.png'
+import React from 'react';
+import logo from "../wislogo.png";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-const Navbar = () => {
-    return ( 
-        <div className="navbar">
+const Navbar = ({ toggleSidebar }) => {
+  return (
+    <div className="navbar">
+      <img src={logo} className="wislogo" alt="logo" />
+      <div className="burgericon" onClick={toggleSidebar}>
+        <i className="bi bi-list"></i>
+      </div>
+      <div className="user-info">
+        <i className="bi bi-person-circle user-icon"></i>
+      </div>
+    </div>
+  );
+};
 
-                    <div className='boxlogo'>
-                        <i class="bi bi-boxes"></i>
-                    </div>
-
-                    <div className='burgericon'>
-                        <i class="bi bi-list"></i>
-                    </div>
-
-                 <div className='wislogo'>
-                     <img src={logo} className='wis-logo'></img>
-                </div>
-
-
-                <div className="user-info">
-                    <i className="bi bi-person-circle user-icon"></i>
-                </div>
-        </div>
-
-     );
-}
- 
 export default Navbar;
