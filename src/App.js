@@ -9,6 +9,8 @@ import Sales from './components/Sales';
 import Reports from './components/Reports';
 import Products from './components/Products';
 
+
+
 function App() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
