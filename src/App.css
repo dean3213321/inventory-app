@@ -1,50 +1,45 @@
-.body{
+body {
   margin: 0;
+  font-family: Arial, sans-serif; /* Add a default font for better readability */
 }
 
-.navbar{
+.navbar {
   display: flex;
-  justify-content: center;
+  align-items: center; /* Center items vertically */
   height: 4.5rem;
   background-color: #502d77;
+  padding: 0 4rem; /* Add padding for better spacing */
 }
 
-.wislogo{
-  margin-right: 75rem;
-  margin-top: .5rem;
+.wislogo {
   height: 3.5rem;
+  margin-right: 1rem; /* Add spacing between logo and burger icon */
 }
 
-.burgericon{
-  position: absolute;
-  display: flex;
-  margin-right: 62rem;
-  font-size: 3rem;
+.burgericon {
+  font-size: 2.5rem;
+  padding: 0 2.5rem;
   color: rgb(0, 0, 0);
-  
+  cursor: pointer;
+  transition: color 0.3s ease; /* Smooth color transition */
 }
 
-.burgericon:hover{
-  cursor: pointer;
+.burgericon:hover {
   color: rgb(238, 241, 241);
 }
 
-
-.user-info{
-  position: absolute;
-  display: flex;
-  margin-left: 81rem;
-  font-size: 3rem;
+.user-info {
+  font-size: 2.5rem;
   color: white;
+  margin-left: auto; /* Push user info to the far right */
 }
 
 .sidebar {
-  display: flex;
-  justify-content: left;
-  width: 4.1rem; /* Reduced width to fit only icons */
-  height: 88.8vh;
+  width: 4.1rem; /* Initial width */
+  height: 100vh;
   background-color: #502d77;
   transition: width 0.3s ease; /* Smooth transition for width change */
+  overflow: hidden; /* Hide overflow content */
 }
 
 .sidebar:hover {
@@ -63,7 +58,7 @@
 }
 
 .sidebar li {
-  padding: 2.4rem 1rem;
+  padding: 2.5rem 1rem; /* Adjust padding for better spacing */
   display: flex;
   align-items: center;
   white-space: nowrap; /* Prevent text from wrapping */
@@ -72,7 +67,7 @@
 .sidebar i {
   font-size: 1.5rem;
   color: white;
-  margin-right: .5rem; /* Space between icon and text */
+  margin-right: 1rem; /* Space between icon and text */
 }
 
 .sidebar-text {
@@ -82,21 +77,20 @@
 
 .sidebar:hover .sidebar-text {
   opacity: 1; /* Show text on hover */
-  
 }
 
 .sidebar.expanded .sidebar-text {
   opacity: 1; /* Show text when expanded */
 }
 
-
-.sidebar a{
+.sidebar a {
   color: black;
-  list-style: none;
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
-.sidebar a:hover{
+.sidebar a:hover {
   font-size: 1.4rem;
   font-weight: bold;
   color: beige;

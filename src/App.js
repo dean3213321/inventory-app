@@ -3,7 +3,6 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 
-
 function App() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
@@ -15,9 +14,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Navbar toggleSidebar={toggleSidebar} />
-        <Sidebar isExpanded={isSidebarExpanded} />
       </header>
+        <Sidebar isExpanded={isSidebarExpanded} />
     </div>
+  
   );
 }
 
