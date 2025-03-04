@@ -14,25 +14,25 @@ const Sidebar = ({ isExpanded }) => {
         <li>
           <i className="bi bi-people-fill"></i>
           <span className="sidebar-text">
-            <a href="/">Users</a>
+            <a href="Users">Users</a>
           </span>
         </li>
         <li>
           <i className="bi bi-box-seam"></i>
           <span className="sidebar-text">
-            <a href="/">Products</a>
+            <a href="Products">Products</a>
           </span>
         </li>
         <li>
           <i className="bi bi-coin"></i>
           <span className="sidebar-text">
-            <a href="/">Sales</a>
+            <a href="Sales">Sales</a>
           </span>
         </li>
         <li>
           <i className="bi bi-bar-chart-line"></i>
           <span className="sidebar-text">
-            <a href="/">Report</a>
+            <a href="Reports">Reports</a>
           </span>
         </li>
       </ul>
