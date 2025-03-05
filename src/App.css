@@ -5,11 +5,17 @@ body {
 
 .navbar {
   display: flex;
-  align-items: center; /* Center items vertically */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  align-items: center;
   height: 4.5rem;
   background-color: #502d77;
-  padding: 0 4rem; /* Add padding for better spacing */
+  padding: 0 4rem;
+  z-index: 1000; /* Ensures navbar stays above other elements */
 }
+
 
 .wislogo {
   height: 3.5rem;
@@ -35,9 +41,12 @@ body {
 }
 
 .sidebar {
+  padding-top: 3.8rem;
   width: 4.1rem; /* Initial width */
   position: fixed;
-  height: 100vh;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
   background-color: #502d77;
   transition: width 0.3s ease; /* Smooth transition for width change */
   overflow: hidden; /* Hide overflow content */

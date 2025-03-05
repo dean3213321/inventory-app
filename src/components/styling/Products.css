@@ -1,0 +1,37 @@
+.products-header {
+    justify-content: space-between;
+    display: flex;
+    padding: 0 2rem;
+}
+
+.Addproducts {
+    text-decoration: underline;
+}
+
+.products-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.product-box {
+    border: 1px solid #a1a1a1;
+    padding: .3rem;
+    width: 45%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product-box h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.product-box p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.product-box i {
+    color: #fcbb27; /* Example: Change icon color */
+}

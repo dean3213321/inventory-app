@@ -34,7 +34,7 @@ const Users = () => {
       const dt = $(tableRef.current).DataTable({
         responsive: true,
         select: true,
-        buttons: ["copy", "csv", "excel", "print", "colvis"],
+        buttons: ["copy", "csv", "excel", "print",],
       });
 
       // Move the buttons to the custom container
