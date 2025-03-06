@@ -19,12 +19,12 @@ body {
 
 .wislogo {
   height: 3.5rem;
-  margin-right: 1rem; /* Add spacing between logo and burger icon */
+  margin-left: 4rem; /* Add spacing between logo and burger icon */
 }
 
 .burgericon {
   font-size: 2.5rem;
-  padding: 0 2.5rem;
+  margin-left: 3rem;
   color: rgb(0, 0, 0);
   cursor: pointer;
   transition: color 0.3s ease; /* Smooth color transition */
@@ -38,6 +38,7 @@ body {
   font-size: 2.5rem;
   color: white;
   margin-left: auto; /* Push user info to the far right */
+  padding-right: 2rem;
 }
 
 .sidebar {

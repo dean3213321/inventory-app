@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./styling/Products.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -16,24 +17,28 @@ import "datatables.net-buttons/js/buttons.html5.min";
 import "datatables.net-buttons/js/buttons.print.min";
 import "datatables.net-buttons-dt/css/buttons.dataTables.min.css"; //Button CSS File
 
+// modal imports
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
+
 DataTable.use(DT);
 
 const Products = () => {
+
+  const [showModal, setShowModal] = useState(false);
+
   const columns = [
-    { title: "Name", data: "name" },
     { title: "Item", data: "item" },
     { title: "Quantity", data: "quantity" },
     { title: "Date", data: "date" },
-    { title: "Status", data: "status" },
   ];
 
   const data = [
     {
-      name: "Dean",
       item: "book",
       quantity: "5",
       date: "03-05-2025",
-      status: "Returned",
     },
   ];
 
@@ -41,7 +46,7 @@ const Products = () => {
     <div className="products-page">
       <div className="products-header">
         <h2>Products</h2>
-        <h3 className="Addproducts">Add Products</h3>
+        <h3 className="Addproducts" onClick={() => setShowModal(true)} style={{ cursor: "pointer" }}>Add Products</h3>
       </div>
       <div className="products-box">
         <div className="product-box">
@@ -75,7 +80,27 @@ const Products = () => {
             }}
         />
       </div>
+      <div className="modal">
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Item Name</p>
+          <input></input>
+          <p>Quantity</p>
+          <input type="number"></input>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary">Submit</Button>
+        </Modal.Footer>
+      </Modal>
+      </div>
     </div>
+    
   );
 };
 
