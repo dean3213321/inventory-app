@@ -35,174 +35,6 @@ const Products = () => {
       date: "03-05-2025",
       status: "Returned",
     },
-    {
-      name: "Dean",
-      item: "book",
-      quantity: "4",
-      date: "03-05-2025",
-      status: " Not Returned",
-    },
-    {
-      name: "Dean",
-      item: "book",
-      quantity: "3",
-      date: "03-05-2025",
-      status: "Returned",
-    },
-    {
-      name: "Dean",
-      item: "book",
-      quantity: "2",
-      date: "03-05-2025",
-      status: "Returned",
-    },
-    {
-      name: "Dean",
-      item: "book",
-      quantity: "1",
-      date: "03-05-2025",
-      status: "Not Returned",
-    },
-    {
-        name: "Dean",
-        item: "book",
-        quantity: "5",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "4",
-        date: "03-05-2025",
-        status: " Not Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "3",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "2",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "1",
-        date: "03-05-2025",
-        status: "Not Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "5",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "4",
-        date: "03-05-2025",
-        status: " Not Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "3",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "2",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "1",
-        date: "03-05-2025",
-        status: "Not Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "5",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "4",
-        date: "03-05-2025",
-        status: " Not Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "3",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "2",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "1",
-        date: "03-05-2025",
-        status: "Not Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "5",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "4",
-        date: "03-05-2025",
-        status: " Not Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "3",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "2",
-        date: "03-05-2025",
-        status: "Returned",
-      },
-      {
-        name: "Dean",
-        item: "book",
-        quantity: "1",
-        date: "03-05-2025",
-        status: "Not Returned",
-      },
   ];
 
   return (
@@ -230,16 +62,17 @@ const Products = () => {
         </div>
       </div>
       <div className="products-table">
-        <DataTable
-          className="display cell-border"
-          columns={columns}
-          data={data}
-          options={{
-            responsive: true,
-            select: true,
-            dom: "frtBp", // Add 'B' for buttons to the dom option
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          }}
+          <DataTable
+            className="display cell-border"
+            columns={columns}
+            data={data}
+            options={{
+              responsive: true,
+              select: true,
+              dom: '<"d-flex justify-content-between"lf>rt<"d-flex justify-content-between"ip>B',
+
+              buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            }}
         />
       </div>
     </div>

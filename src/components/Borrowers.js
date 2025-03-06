@@ -1,4 +1,4 @@
-const Reports = () => {
+const Borrowers = () => {
     return ( 
         <div>
             <h1>meow</h1>
@@ -6,4 +6,4 @@ const Reports = () => {
      );
 }
  
-export default Reports;
+export default Borrowers;

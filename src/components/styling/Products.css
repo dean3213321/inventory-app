@@ -35,3 +35,23 @@
 .product-box i {
     color: #fcbb27; /* Example: Change icon color */
 }
+
+.dataTables_length {
+    float: left;
+  }
+  
+  .dataTables_filter {
+    float: right;
+  }
+  
+
+
+  .dataTables_Buttons{
+    float: left;
+
+  }
+  
+  .dataTables_pagination{
+    float: right;
+
+  }

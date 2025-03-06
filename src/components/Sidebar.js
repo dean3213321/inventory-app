@@ -32,7 +32,7 @@ const Sidebar = ({ isExpanded }) => {
         <li>
           <i className="bi bi-bar-chart-line"></i>
           <span className="sidebar-text">
-            <a href="Reports">Reports</a>
+            <a href="Borrowers">Borrowers</a>
           </span>
         </li>
       </ul>

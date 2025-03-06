@@ -6,7 +6,7 @@ import Dashboard from './components/Dashboard';
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import Users from './components/Users';
 import Sales from './components/Sales';
-import Reports from './components/Reports';
+import Borrowers from './components/Borrowers';
 import Products from './components/Products';
 
 
@@ -31,7 +31,7 @@ function App() {
             <Route exact path="/Users" element={<Users />} />
             <Route exact path="/Products" element={<Products />} />
             <Route exact path="/Sales" element={<Sales />} />
-            <Route exact path="/Reports" element={<Reports />} />
+            <Route exact path="/Borrowers" element={<Borrowers />} />
           </Routes>
         </div>
     </div>

@@ -1,0 +1,9 @@
+.sales-header {
+    justify-content: space-between;
+    display: flex;
+    padding: 0 2rem;
+}
+
+.Addsales {
+    text-decoration: underline;
+}
