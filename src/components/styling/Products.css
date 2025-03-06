@@ -55,3 +55,38 @@
     float: right;
 
   }
+
+  .modal .modal-header{
+    background-color: #502d77;
+  }
+
+ .modal .modal-title {
+    display: flex;
+    margin-left: 9.8rem;
+    color: #fff; /* White text */
+    font-weight: bold;
+ }
+ 
+  .modal .modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+   .modal .modal-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-body p {
+    margin-bottom: 4px; /* Reduce space below the paragraph */
+  }
+  
+  .modal-body input {
+    margin-top: 2px; /* Reduce space above the input */
+    margin-bottom: 5px;
+    padding: 6px; /* Adjust padding for better appearance */
+  }
+  
