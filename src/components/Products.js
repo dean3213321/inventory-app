@@ -190,6 +190,7 @@ const Products = () => {
           onClick={() => setShowModal(true)}
           style={{ cursor: "pointer" }}
         >
+          <i class="bi bi-cart-plus-fill" style={{ fontSize: "1.8rem", marginRight: "8px" }}></i>
           Add Products
         </h3>
       </div>
@@ -218,7 +219,7 @@ const Products = () => {
         {error && <p className="error-message">Error: {error}</p>}
 
         {showAlert && (
-  <Alert variant="success" onClose={() => setShowAlert(false)} dismissible>
+  <Alert variant="success" onClose={() => setShowAlert(false)} dismissible className="w-50 mx-auto text-center">
     Product added successfully!
   </Alert>
 )}
