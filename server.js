@@ -45,18 +45,25 @@ app.get('/api/products', (req, res) => {
 
 // POST (add) a new product
 app.post('/api/products', (req, res) => {
-    const { item, quantity, selling_price, } = req.body;
-    if (!item || quantity || selling_price === undefined || isNaN(parseInt(quantity))) {
-        return res.status(400).json({ error: "Item name and quantity are required, and quantity must be a number." });
+    const { item, quantity, selling_price } = req.body;
+
+    // Validate all required fields and their types
+    if (!item || quantity === undefined || selling_price === undefined) {
+        return res.status(400).json({ error: "Item name, quantity, and selling price are required." });
     }
+    if (isNaN(quantity) || isNaN(selling_price)) {
+        return res.status(400).json({ error: "Quantity and selling price must be valid numbers." });
+    }
+
     const sql = "INSERT INTO inventory_bookstore (product_name, quantity, selling_price, date) VALUES (?, ?, ?, NOW())";
-    db.query(sql, [item, quantity, selling_price, ], (err, result) => {
+    db.query(sql, [item, quantity, selling_price], (err, result) => {
         if (err) {
             console.error("Error adding product:", err);
             res.status(500).json({ error: "Failed to add product" });
             return;
         }
-          // Return the newly created ID.  VERY IMPORTANT.
+
+        // Return the newly created product
         const newProduct = {
             id: result.insertId, // Get the auto-incremented ID
             item: item,
@@ -75,28 +82,29 @@ app.post('/api/products', (req, res) => {
 // PUT (update) an existing product
 app.put('/api/products/:id', (req, res) => {
     const productId = parseInt(req.params.id, 10); // Get ID from URL, convert to number
-    const { item, quantity } = req.body;
-
-    if (!item || quantity === undefined || isNaN(parseInt(quantity))) {
-        return res.status(400).json({ error: "Item name and quantity are required, and quantity must be a number." });
+    const { item, quantity, selling_price } = req.body; // Use selling_price
+  
+    // Validate selling_price
+    if (isNaN(selling_price)) {
+      console.error("Invalid selling price:", selling_price);
+      return res.status(400).json({ error: "Selling price must be a valid number." });
     }
-
-    const sql = "UPDATE inventory_bookstore SET product_name = ?, quantity = ? WHERE id = ?";
-    db.query(sql, [item, quantity, productId], (err, result) => {
-        if (err) {
-            console.error("Error updating product:", err);
-            res.status(500).json({ error: "Failed to update product" });
-            return;
-        }
-        if (result.affectedRows === 0) {
-            // No rows were updated (product ID not found)
-            res.status(404).json({ error: "Product not found" });
-        } else {
-          res.status(200).json({ message: "Product updated successfully" });
-        }
-
+  
+    // SQL query to update the product
+    const sql = "UPDATE inventory_bookstore SET product_name = ?, quantity = ?, selling_price = ? WHERE id = ?";
+    db.query(sql, [item, quantity, selling_price, productId], (err, result) => {
+      if (err) {
+        console.error("Error updating product:", err);
+        return res.status(500).json({ error: "Failed to update product" });
+      }
+      if (result.affectedRows === 0) {
+        // No rows were updated (product ID not found)
+        return res.status(404).json({ error: "Product not found" });
+      }
+      // Success
+      res.status(200).json({ message: "Product updated successfully" });
     });
-});
+  });
 
 // DELETE a product
 app.delete('/api/products/:id', (req, res) => {

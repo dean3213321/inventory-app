@@ -119,34 +119,48 @@ const Products = () => {
   // Handle form submission (add product)
   const handleSubmit = async () => {
     try {
+      // Parse values to numbers
+      const quantity = parseInt(newQuantity, 10); // Integer
+      const sellingPrice = parseFloat(newSellingPrice); // Float (for decimals)
+  
+      // Validate parsed values
+      if (isNaN(quantity)) {
+        throw new Error("Quantity must be a valid number.");
+      }
+      if (isNaN(sellingPrice)) {
+        throw new Error("Selling price must be a valid number.");
+      }
+  
       const response = await fetch("http://localhost:5000/api/products", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ item: newItem, quantity: newQuantity, selling_price: newSellingPrice, }),
+        body: JSON.stringify({ 
+          item: newItem, 
+          quantity: quantity, // Send as number
+          selling_price: sellingPrice, // Send as number
+        }),
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`
-        );
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
-
+  
       const addedProduct = await response.json();
-      //setData([...data, addedProduct]); // Don't add to data directly, refetch instead
       fetchData(); // Refetch to get updated list with IDs
-
+  
+      // Reset form/state on success
       setNewItem("");
       setNewQuantity("");
       setNewSellingPrice("");
       setShowAddModal(false);
       setError(null);
-
+  
       // Show success alert
       setShowAlert(true);
-
+  
       // Hide alert after 3 seconds
       setTimeout(() => {
         setShowAlert(false);
@@ -160,6 +174,18 @@ const Products = () => {
   // Handle update
   const handleUpdate = async () => {
     try {
+      // Parse quantity and sellingPrice as numbers
+      const quantity = parseFloat(updateQuantity);
+      const sellingPrice = parseFloat(updateSellingPrice);
+  
+      // Validate numbers
+      if (isNaN(quantity)) {
+        throw new Error("Quantity must be a valid number.");
+      }
+      if (isNaN(sellingPrice)) {
+        throw new Error("Selling price must be a valid number.");
+      }
+  
       const response = await fetch(
         `http://localhost:5000/api/products/${updateId}`,
         {
@@ -167,18 +193,19 @@ const Products = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ item: updateItem, quantity: updateQuantity }),
+          body: JSON.stringify({
+            item: updateItem,
+            quantity: quantity,
+            selling_price: sellingPrice, // Ensure this matches the backend field name
+          }),
         }
       );
-
+  
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(
-          errorData.error || `HTTP error! status: ${response.status}`
-        );
+        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
-
-      //  const updatedProduct = await response.json(); //Not needed
+  
       fetchData(); // Refetch to update the table
       setShowUpdateModal(false);
       setError(null);
@@ -191,6 +218,7 @@ const Products = () => {
       setError(error.message);
     }
   };
+  
 
   // Handle delete
   const handleDelete = async (id) => {
@@ -400,7 +428,7 @@ const Products = () => {
           />
           <p className="mt-3 mb-1">Selling Price</p>
           <input
-            type="number"
+            type="text"
             value={updateSellingPrice}
             onChange={(e) => setUpdateSellingPrice(e.target.value)}
             className="form-control w-75"
