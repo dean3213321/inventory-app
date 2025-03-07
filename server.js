@@ -32,7 +32,7 @@ db.connect(err => {
 
 // GET all products (Modified to include ID)
 app.get('/api/products', (req, res) => {
-    const sql = "SELECT id, product_name AS item, quantity, DATE_FORMAT(date, '%m-%d-%Y') AS date FROM inventory_bookstore";
+    const sql = "SELECT id, product_name AS item, quantity, selling_price, DATE_FORMAT(date, '%m-%d-%Y') AS date FROM inventory_bookstore";
     db.query(sql, (err, results) => {
         if (err) {
             console.error("Error fetching products:", err);
@@ -45,12 +45,12 @@ app.get('/api/products', (req, res) => {
 
 // POST (add) a new product
 app.post('/api/products', (req, res) => {
-    const { item, quantity } = req.body;
-    if (!item || quantity === undefined || isNaN(parseInt(quantity))) {
+    const { item, quantity, selling_price, } = req.body;
+    if (!item || quantity || selling_price === undefined || isNaN(parseInt(quantity))) {
         return res.status(400).json({ error: "Item name and quantity are required, and quantity must be a number." });
     }
-    const sql = "INSERT INTO inventory_bookstore (product_name, quantity, date) VALUES (?, ?, NOW())";
-    db.query(sql, [item, quantity], (err, result) => {
+    const sql = "INSERT INTO inventory_bookstore (product_name, quantity, selling_price, date) VALUES (?, ?, ?, NOW())";
+    db.query(sql, [item, quantity, selling_price, ], (err, result) => {
         if (err) {
             console.error("Error adding product:", err);
             res.status(500).json({ error: "Failed to add product" });
@@ -61,6 +61,7 @@ app.post('/api/products', (req, res) => {
             id: result.insertId, // Get the auto-incremented ID
             item: item,
             quantity: quantity,
+            selling_price: selling_price,
             date: new Date().toLocaleDateString('en-US', {
                 month: '2-digit',
                 day: '2-digit',
@@ -148,7 +149,7 @@ app.get('/api/low-stock', (req, res) => {
 
 // GET all users with "teacher" in their position
 app.get('/api/users/teachers', (req, res) => {
-    const sql = "SELECT id, fname, lname, email, position FROM user WHERE position LIKE '%teacher%'";
+    const sql = "SELECT id, fname, lname, email, position, isactive FROM user WHERE position NOT IN ('Student', 'Gatepass', 'Intern') AND isactive = 1";
     db.query(sql, (err, results) => {
       if (err) {
         console.error("Error fetching teacher data:", err);

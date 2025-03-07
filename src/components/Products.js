@@ -32,8 +32,10 @@ const Products = () => {
   const [data, setData] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [newQuantity, setNewQuantity] = useState("");
+  const [newSellingPrice, setNewSellingPrice] = useState("");
   const [updateItem, setUpdateItem] = useState(""); // Item name for updating
   const [updateQuantity, setUpdateQuantity] = useState(""); // Quantity for updating
+  const [updateSellingPrice, setUpdateSellingPrice] = useState("");
   const [updateId, setUpdateId] = useState(null); // ID of item being updated
   const [error, setError] = useState(null);
   const [totalSupplies, setTotalSupplies] = useState(0);
@@ -43,6 +45,7 @@ const Products = () => {
     { title: "Item", data: "item" },
     { title: "Quantity", data: "quantity" },
     { title: "Date", data: "date" },
+    { title: "Selling Price", data: "selling_price"},
     {
       title: "Actions",
       data: null, // Important: No data source for this column
@@ -121,7 +124,7 @@ const Products = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ item: newItem, quantity: newQuantity }),
+        body: JSON.stringify({ item: newItem, quantity: newQuantity, selling_price: newSellingPrice, }),
       });
 
       if (!response.ok) {
@@ -137,6 +140,7 @@ const Products = () => {
 
       setNewItem("");
       setNewQuantity("");
+      setNewSellingPrice("");
       setShowAddModal(false);
       setError(null);
 
@@ -223,6 +227,7 @@ const Products = () => {
     setUpdateId(rowData.id);
     setUpdateItem(rowData.item);
     setUpdateQuantity(rowData.quantity);
+    setUpdateSellingPrice(rowData.selling_price);
     setShowUpdateModal(true);
   };
 
@@ -347,6 +352,13 @@ const Products = () => {
             onChange={(e) => setNewQuantity(e.target.value)}
             className="form-control w-75"
           />
+          <p className="mt-3 mb-1">Selling Price</p>
+          <input
+            type="number"
+            value={newSellingPrice}
+            onChange={(e) => setNewSellingPrice(e.target.value)}
+            className="form-control w-75"
+          />
 
           {error && <p className="text-danger mt-2">Error: {error}</p>}
         </Modal.Body>
@@ -384,6 +396,13 @@ const Products = () => {
             type="number"
             value={updateQuantity}
             onChange={(e) => setUpdateQuantity(e.target.value)}
+            className="form-control w-75"
+          />
+          <p className="mt-3 mb-1">Selling Price</p>
+          <input
+            type="number"
+            value={updateSellingPrice}
+            onChange={(e) => setUpdateSellingPrice(e.target.value)}
             className="form-control w-75"
           />
           {error && <p className="text-danger mt-2">Error: {error}</p>}

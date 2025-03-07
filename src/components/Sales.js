@@ -20,7 +20,6 @@ const Sales = () => {
   const columns = [
     { title: "Productname", data: "productname" },
     { title: "Instock", data: "instock" },
-    { title: "Buyingprice", data: "buyingprice" },
     { title: "Sellingprice", data: "sellingprice" },
     { title: "Date", data: "date" },
   ];
@@ -29,25 +28,9 @@ const Sales = () => {
     {
       productname: "Uniform",
       instock: "55",
-      buyingprice: "5000",
       sellingprice: "8000",
       date: "03-03-2025",
     },
-    {
-        productname: "Uniform",
-        instock: "55",
-        buyingprice: "5000",
-        sellingprice: "8000",
-        date: "03-03-2025",
-      },
-      {
-        productname: "Uniform",
-        instock: "55",
-        buyingprice: "5000",
-        sellingprice: "8000",
-        date: "03-03-2025",
-      },
-      
   ];
 
   return (
