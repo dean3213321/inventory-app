@@ -1,23 +1,26 @@
-const express = require('express')
-const mysql = require('mysql')
-const cors = require('cors')
-const path = require('path')
+require('dotenv').config();
 
-const app = express()
+const express = require('express');
+const mysql = require('mysql');
+const cors = require('cors');
+const path = require('path');
 
-app.use(express.static(path.join(__dirname, "public")))
-app.use(cors())
-app.use(express.json())
+const app = express();
 
-const port = 5000
+app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
+app.use(express.json());
 
+// Use PORT from environment or default to 5000
+const port = process.env.PORT || 5000;
+
+// Create a database connection using environment variables
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "u652554119_admissions",
-    password: "Dg6iW4uYOCyzBFfG",
-    database: "u652554119_admissions"
-})
-
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
 
 db.connect(err => {
     if (err) {
@@ -141,6 +144,19 @@ app.get('/api/low-stock', (req, res) => {
         res.json({ lowStockItems });
     });
 });
+
+
+// GET all users with "teacher" in their position
+app.get('/api/users/teachers', (req, res) => {
+    const sql = "SELECT id, fname, lname, email, position FROM user WHERE position LIKE '%teacher%'";
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error("Error fetching teacher data:", err);
+        return res.status(500).json({ error: "Failed to fetch teacher data" });
+      }
+      res.json(results);
+    });
+  });
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
