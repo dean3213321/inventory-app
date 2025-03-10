@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./styling/Products.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -67,40 +67,28 @@ const Products = () => {
 
   // Fetch product data, total supplies, and low stock items on component mount
   //and refetch the products
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       // Fetch products
-      const productsResponse = await fetch(
-        "http://localhost:5000/api/products"
-      );
+      const productsResponse = await fetch("http://localhost:5000/api/products");
       if (!productsResponse.ok) {
-        throw new Error(
-          `HTTP error fetching products! status: ${productsResponse.status}`
-        );
+        throw new Error(`HTTP error fetching products! status: ${productsResponse.status}`);
       }
       const productsData = await productsResponse.json();
       setData(productsData);
 
       // Fetch total supplies
-      const totalSuppliesResponse = await fetch(
-        "http://localhost:5000/api/total-supplies"
-      );
+      const totalSuppliesResponse = await fetch("http://localhost:5000/api/total-supplies");
       if (!totalSuppliesResponse.ok) {
-        throw new Error(
-          `HTTP error fetching total supplies! status: ${totalSuppliesResponse.status}`
-        );
+        throw new Error(`HTTP error fetching total supplies! status: ${totalSuppliesResponse.status}`);
       }
       const totalSuppliesData = await totalSuppliesResponse.json();
       setTotalSupplies(totalSuppliesData.totalSupplies);
 
       // Fetch low stock items
-      const lowStockResponse = await fetch(
-        "http://localhost:5000/api/low-stock"
-      );
+      const lowStockResponse = await fetch("http://localhost:5000/api/low-stock");
       if (!lowStockResponse.ok) {
-        throw new Error(
-          `HTTP error fetching low stock items! status: ${lowStockResponse.status}`
-        );
+        throw new Error(`HTTP error fetching low stock items! status: ${lowStockResponse.status}`);
       }
       const lowStockData = await lowStockResponse.json();
       setLowStockItems(lowStockData.lowStockItems);
@@ -110,11 +98,11 @@ const Products = () => {
       console.error("Error fetching data:", error);
       setError(error.message);
     }
-  };
+  }, []); // Empty dependency array: runs only once on mount
 
   useEffect(() => {
     fetchData();
-  }, []); // Empty dependency array: runs only once on mount
+  }, [fetchData]); // Dependency on `fetchData` to ensure it runs only once on mount
 
   // Handle form submission (add product)
   const validateInputs = (quantity, sellingPrice) => {
@@ -126,15 +114,15 @@ const Products = () => {
     }
   };
   
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     try {
       // Parse values to numbers
       const quantity = parseInt(newQuantity, 10); // Integer
       const sellingPrice = parseFloat(newSellingPrice); // Float (for decimals)
-  
+
       // Validate parsed values
       validateInputs(quantity, sellingPrice);
-  
+
       // Send POST request to add new product
       const response = await fetch("http://localhost:5000/api/products", {
         method: "POST",
@@ -147,25 +135,25 @@ const Products = () => {
           selling_price: sellingPrice, // Send as number
         }),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
-  
+
       // Refetch data to get updated list with IDs
       await fetchData();
-  
+
       // Reset form/state on success
       setNewItem("");
       setNewQuantity("");
       setNewSellingPrice("");
       setShowAddModal(false);
       setError(null);
-  
+
       // Show success alert
       setShowAlert(true);
-  
+
       // Hide alert after 3 seconds
       setTimeout(() => {
         setShowAlert(false);
@@ -174,15 +162,15 @@ const Products = () => {
       console.error("Error submitting data:", error);
       setError(error.message);
     }
-  };
+  }, [newItem, newQuantity, newSellingPrice, fetchData]); // Dependencies
 
   // Handle update
-  const handleUpdate = async () => {
+  const handleUpdate = useCallback(async () => {
     try {
       // Parse quantity and sellingPrice as numbers
       const quantity = parseFloat(updateQuantity);
       const sellingPrice = parseFloat(updateSellingPrice);
-  
+
       // Validate numbers
       if (isNaN(quantity)) {
         throw new Error("Quantity must be a valid number.");
@@ -190,7 +178,7 @@ const Products = () => {
       if (isNaN(sellingPrice)) {
         throw new Error("Selling price must be a valid number.");
       }
-  
+
       const response = await fetch(
         `http://localhost:5000/api/products/${updateId}`,
         {
@@ -205,12 +193,12 @@ const Products = () => {
           }),
         }
       );
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
-  
+
       fetchData(); // Refetch to update the table
       setShowUpdateModal(false);
       setError(null);
@@ -222,11 +210,11 @@ const Products = () => {
       console.error("Error updating product:", error);
       setError(error.message);
     }
-  };
+  }, [updateItem, updateQuantity, updateSellingPrice, updateId, fetchData]);
   
 
   // Handle delete
-  const handleDelete = async (id) => {
+  const handleDelete = useCallback(async (id) => {
     if (!window.confirm("Are you sure you want to delete this item?")) {
       return; // Exit if user cancels
     }
@@ -253,7 +241,7 @@ const Products = () => {
       console.error("Error deleting product:", error);
       setError(error.message);
     }
-  };
+  }, [fetchData]);
 
   // Function to open the update modal and populate data
   const openUpdateModal = (rowData) => {
@@ -293,7 +281,7 @@ const Products = () => {
         table.removeEventListener("click", handleClick);
       };
     }
-  }, [data]); // Dependency on `data` is important for re-binding events
+  }, [data, handleDelete]); // Dependency on `data` and `handleDelete` is important for re-binding events
 
   return (
     <div className="products-page">
