@@ -23,9 +23,14 @@ import Modal from "react-bootstrap/Modal";
 
 import { Alert } from "react-bootstrap";
 
+require('dotenv').config();
+
 DataTable.use(DT);
 
 const Products = () => {
+
+  const URL = process.env.REACT_APP_URL;
+
   const [showAlert, setShowAlert] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -70,7 +75,7 @@ const Products = () => {
   const fetchData = useCallback(async () => {
     try {
       // Fetch products
-      const productsResponse = await fetch("http://localhost:5000/api/products");
+      const productsResponse = await fetch(`${URL}/api/products`);
       if (!productsResponse.ok) {
         throw new Error(`HTTP error fetching products! status: ${productsResponse.status}`);
       }
@@ -78,7 +83,7 @@ const Products = () => {
       setData(productsData);
 
       // Fetch total supplies
-      const totalSuppliesResponse = await fetch("http://localhost:5000/api/total-supplies");
+      const totalSuppliesResponse = await fetch(`${URL}/api/total-supplies`);
       if (!totalSuppliesResponse.ok) {
         throw new Error(`HTTP error fetching total supplies! status: ${totalSuppliesResponse.status}`);
       }
@@ -86,7 +91,7 @@ const Products = () => {
       setTotalSupplies(totalSuppliesData.totalSupplies);
 
       // Fetch low stock items
-      const lowStockResponse = await fetch("http://localhost:5000/api/low-stock");
+      const lowStockResponse = await fetch(`${URL}/api/low-stock`);
       if (!lowStockResponse.ok) {
         throw new Error(`HTTP error fetching low stock items! status: ${lowStockResponse.status}`);
       }
@@ -124,7 +129,7 @@ const Products = () => {
       validateInputs(quantity, sellingPrice);
 
       // Send POST request to add new product
-      const response = await fetch("http://localhost:5000/api/products", {
+      const response = await fetch(`${URL}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -180,7 +185,7 @@ const Products = () => {
       }
 
       const response = await fetch(
-        `http://localhost:5000/api/products/${updateId}`,
+        `${URL}/api/products/${updateId}`,
         {
           method: "PUT",
           headers: {
@@ -220,7 +225,7 @@ const Products = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const response = await fetch(`${URL}/api/products/${id}`, {
         method: "DELETE",
       });
 
