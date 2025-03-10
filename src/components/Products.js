@@ -117,6 +117,15 @@ const Products = () => {
   }, []); // Empty dependency array: runs only once on mount
 
   // Handle form submission (add product)
+  const validateInputs = (quantity, sellingPrice) => {
+    if (isNaN(quantity)) {
+      throw new Error("Quantity must be a valid number.");
+    }
+    if (isNaN(sellingPrice)) {
+      throw new Error("Selling price must be a valid number.");
+    }
+  };
+  
   const handleSubmit = async () => {
     try {
       // Parse values to numbers
@@ -124,13 +133,9 @@ const Products = () => {
       const sellingPrice = parseFloat(newSellingPrice); // Float (for decimals)
   
       // Validate parsed values
-      if (isNaN(quantity)) {
-        throw new Error("Quantity must be a valid number.");
-      }
-      if (isNaN(sellingPrice)) {
-        throw new Error("Selling price must be a valid number.");
-      }
+      validateInputs(quantity, sellingPrice);
   
+      // Send POST request to add new product
       const response = await fetch("http://localhost:5000/api/products", {
         method: "POST",
         headers: {
@@ -148,8 +153,8 @@ const Products = () => {
         throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
       }
   
-      const addedProduct = await response.json();
-      fetchData(); // Refetch to get updated list with IDs
+      // Refetch data to get updated list with IDs
+      await fetchData();
   
       // Reset form/state on success
       setNewItem("");
