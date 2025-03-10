@@ -23,8 +23,6 @@ import Modal from "react-bootstrap/Modal";
 
 import { Alert } from "react-bootstrap";
 
-require('dotenv').config();
-
 DataTable.use(DT);
 
 const Products = () => {
